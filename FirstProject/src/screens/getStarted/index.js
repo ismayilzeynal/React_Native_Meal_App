@@ -2,14 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Platform, Dimensions } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-function Landing() {
+function GetStarted() {
     return (
         <SafeAreaView style={styles.landing}>
 
             <View style={styles.landingTop}>
                 <Image
                     style={styles.landingAvatar}
-                    source={require('../assets/images/landingAvatar.png')}
+                    source={require('../../assets/images/landingAvatar.png')}
                 />
             </View>
 
@@ -33,7 +33,7 @@ function Landing() {
     );
 }
 
-export default Landing;
+export default GetStarted;
 
 
 const styles = StyleSheet.create({
