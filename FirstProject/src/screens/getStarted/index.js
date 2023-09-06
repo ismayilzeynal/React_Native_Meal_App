@@ -1,8 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Platform, Dimensions } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 function GetStarted() {
+    const navigation = useNavigation();
+
+    const goToHome = () => {
+        navigation.navigate('Home');
+    };
     return (
         <SafeAreaView style={styles.landing}>
 
@@ -25,7 +31,7 @@ function GetStarted() {
 
 
             <View style={styles.landingBottom}>
-                <TouchableOpacity style={styles.submitButton}>
+                <TouchableOpacity style={styles.submitButton} onPress={goToHome}>
                     <Text style={styles.submitButtonText}>GET STARTED</Text>
                 </TouchableOpacity>
             </View>
