@@ -2,9 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import HeartLow from '../assets/icons/heartLow.svg';
 import HeartLowRed from '../assets/icons/heartLowRed.svg';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Meal = ({ item }) => {
+    const navigation = useNavigation();
+
+    const goToRecipe = (id) => {
+        navigation.push('Recipe', { recipeId: id });
+    };
+
     return (
         <View key={item.idMeal} style={styles.mealItem}>
             <View style={styles.mealCard}>
@@ -15,7 +22,7 @@ const Meal = ({ item }) => {
                     <HeartLow style={styles.heartIcn} />
                 </TouchableOpacity>
                 <Text style={styles.mealTitle}>{item.strMeal}</Text>
-                <TouchableOpacity style={styles.mealRecipeParent}>
+                <TouchableOpacity style={styles.mealRecipeParent} onPress={() => goToRecipe(item.idMeal)}>
                     <Text style={styles.mealRecipe}>View recipe  {'>'}</Text>
                 </TouchableOpacity>
             </View>

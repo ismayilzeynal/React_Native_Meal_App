@@ -32,12 +32,6 @@ export const Header = ({ onSearch }) => {
     const [searchText, setSearchText] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
-    // const searchContent = async () => {
-    //     const response = await fetch(`${selectedCategory.url}${searchText}`);
-    //     const reponseJSON = await response.json();
-    //     onSearch(reponseJSON.meals);
-    // };
-
     const searchContent = async () => {
         try {
             const response = await fetch(`${selectedCategory.url}${searchText}`);
