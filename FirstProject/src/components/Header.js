@@ -27,16 +27,16 @@ const categories = [
     },
 ];
 
-function Header() {
+export const Header = ({onSearch}) => {
 
     const [searchText, setSearchText] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
-    // const searchContent = async () => {
-    //     const response = await fetch(`${selectedCategory.url}${searchText}`);
-    //     const reponseJSON = await response.json();
-    //     onSearch(reponseJSON.meals);
-    // };
+    const searchContent = async () => {
+        const response = await fetch(`${selectedCategory.url}${searchText}`);
+        const reponseJSON = await response.json();
+        onSearch(reponseJSON.meals);
+    };
 
     const renderCategoryButton = (item) => {
         let buttonStyle;
@@ -69,7 +69,7 @@ function Header() {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.favourite}>
                     <HeartIcon />
@@ -88,7 +88,7 @@ function Header() {
                         placeholder="Search"
                         value={searchText}
                         onChangeText={setSearchText}
-                    // onSubmitEditing={searchContent}
+                        onSubmitEditing={searchContent}
                     />
                 </View>
 
@@ -102,18 +102,11 @@ function Header() {
                 </ScrollView>
 
             </View>
-
-
-            {/* <ScrollView style={styles.scrollView}>
-                <Text style={styles.text}>
-                    Lorem ipsum
-                </Text>
-            </ScrollView> */}
-        </SafeAreaView>
+        </View>
     );
 }
 
-export default Header;
+// export default Header;
 
 
 
@@ -123,8 +116,8 @@ export default Header;
 const styles = StyleSheet.create({
     container: {
         paddingTop: 40,
-        flex: 1,
-        display: "flex"
+        display: "flex",
+        backgroundColor: "#F2F2F2"
     },
 
     header: {
