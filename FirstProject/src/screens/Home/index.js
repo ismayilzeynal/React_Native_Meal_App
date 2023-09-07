@@ -7,7 +7,8 @@ function Home() {
     const [searchData, setSearchData] = useState([]);
 
     const onSearch = data => {
-        setSearchData(data);
+        if(data && data.length>0)
+            setSearchData(data);
     };
 
     return (

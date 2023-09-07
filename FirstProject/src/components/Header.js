@@ -27,31 +27,52 @@ const categories = [
     },
 ];
 
-export const Header = ({onSearch}) => {
+export const Header = ({ onSearch }) => {
 
     const [searchText, setSearchText] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
+    // const searchContent = async () => {
+    //     const response = await fetch(`${selectedCategory.url}${searchText}`);
+    //     const reponseJSON = await response.json();
+    //     onSearch(reponseJSON.meals);
+    // };
+
     const searchContent = async () => {
-        const response = await fetch(`${selectedCategory.url}${searchText}`);
-        const reponseJSON = await response.json();
-        onSearch(reponseJSON.meals);
+        try {
+            const response = await fetch(`${selectedCategory.url}${searchText}`);
+
+            if (response.ok) {
+                const reponseJSON = await response.json();
+
+                if (reponseJSON && reponseJSON.meals && reponseJSON.meals.length > 0) {
+                    onSearch(reponseJSON.meals);
+                }
+                else {
+                    console.error('Empty input or There is no meal for input');
+                }
+            }
+            else {
+                console.error(`HTTP Error: ${response.status}`);
+            }
+        } 
+        catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const renderCategoryButton = (item) => {
         let buttonStyle;
         let textStyle;
-        if(selectedCategory.key === item.key)
-        {
-            buttonStyle=styles.selectedCategoryButton;
-            textStyle=styles.selectedCategoryText;
+        if (selectedCategory.key === item.key) {
+            buttonStyle = styles.selectedCategoryButton;
+            textStyle = styles.selectedCategoryText;
         }
-        else
-        {
-            buttonStyle=styles.categoryButton;
-            textStyle=styles.categoryText;
+        else {
+            buttonStyle = styles.categoryButton;
+            textStyle = styles.categoryText;
         }
-        
+
 
         return (
             <TouchableOpacity
@@ -93,8 +114,8 @@ export const Header = ({onSearch}) => {
                 </View>
 
 
-                <ScrollView 
-                    horizontal 
+                <ScrollView
+                    horizontal
                     contentContainerStyle={styles.categories}
                     showsHorizontalScrollIndicator={false}
                 >
@@ -183,7 +204,7 @@ const styles = StyleSheet.create({
 
 
     // categories
-    categories:{
+    categories: {
         paddingVertical: 20,
         paddingHorizontal: 24,
     },
